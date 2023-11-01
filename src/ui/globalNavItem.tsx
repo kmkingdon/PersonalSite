@@ -4,6 +4,7 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 import Link from 'next/link';
 
 import { type Item } from '../common/navItems';
+import { Navbar } from 'flowbite-react';
 
 export function GlobalNavItem({
     item,
@@ -14,18 +15,18 @@ export function GlobalNavItem({
     const isActive = item.slug === segment;
   
     return (
-      <Link
-        onClick={close}
-        href={`/${item.slug}`}
-        className={clsx(
-          'block rounded-md px-3 py-2 text-sm font-medium hover:text-gray-300',
-          {
-            'text-gray-400 hover:bg-gray-800': !isActive,
-            'text-white': isActive,
-          },
-        )}
-      >
-        {item.name}
-      </Link>
+        <Navbar.Link 
+            href={`/${item.slug}`}
+            className={clsx(
+            'block rounded-md px-3 py-2 text-sm font-medium hover:text-gray-300',
+            {
+                'text-gray-400 hover:bg-gray-800': !isActive,
+                'text-white': isActive,
+            },
+            )}
+        >
+            {item.name}
+        </Navbar.Link >
+
     );
   }
