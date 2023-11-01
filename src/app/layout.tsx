@@ -16,10 +16,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-gray-1100 overflow-y-scroll bg-white pb-36">
+    <html lang="en" className="dark h-[100vh] min-w-[300px]">
+      <body className="overflow-hidden bg-gray-1100 bg-white pb-36">
         <GlobalNav />
-        <div className="w-full h-full">{children}</div>
+        <div className="w-full h-[calc(100vh-5rem)]">{children}</div>
       </body>
     </html>
   )

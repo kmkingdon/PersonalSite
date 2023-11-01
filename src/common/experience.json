@@ -1,0 +1,39 @@
+{
+    "experience": [
+        {
+            "title": "Team Lead/Software Delivery Manager",
+            "companyName": "Alteryx",
+            "companyLocation": "Broomfield, CO",
+            "companyLink": "https://www.alteryx.com/",
+            "companyImage": "https://community.alteryx.com/t5/image/serverpage/image-id/259688iF6C1C4BD0BC11851?v=v2",
+            "startDate": "February 2021",
+            "endDate": "August 2023",
+            "summary": "Led and cultivated a high-performing engineering team, overseeing the professional development of a diverse group comprising Senior, Mid-level, Associate, and Intern Software Engineers.",
+            "responsibilities": [
+                "Guided the successful execution and delivery of multiple projects/products, including a styled XLSX and drag and drop PDF report designer with a corresponding API, an admin management console, and a comprehensive export compliance integration overhaul.",
+                "Tracked essential engineering KPIs while driving the team's Objectives and Key Results (OKRs), emphasizing both engineering excellence and positive customer outcomes.",
+                "Integrated seamlessly with various libraries and APIs to ensure cohesive system functionality.",
+                "Identified technical risks and developed requirements for architectural and high level technical design plans.",
+                "Collaborated seamlessly with multiple Product Owners to establish a clear product vision, formulated a strategic roadmap, defined precise product/UX requirements, and maintained transparent communication regarding delivery progress, impediments, and outstanding inquiries.",
+                "Devised and implemented a robust quality strategy for the team, encompassing meticulous test plan creation, extensive automated test coverage, systematic defect triage, and the implementation of quality gates during promotion stages resulting in reduced escaped defects and quicker defect resolution for customers.",
+                "Orchestrated the weekly promotion and deployment cycle, orchestrating vital steps such as product and quality approvals, automated regression testing, version updates, feature flag releases, hotfix deployments, and continuous refinement of pipeline tools for heightened promotion automation."
+            ]
+        },
+        {
+            "title": "Software Engineer",
+            "companyName": "Alteryx",
+            "companyLocation": "Broomfield, CO",
+            "companyLink": "https://www.alteryx.com/",
+            "companyImage": "https://community.alteryx.com/t5/image/serverpage/image-id/259688iF6C1C4BD0BC11851?v=v2",
+            "startDate": "September 2019",
+            "endDate": "February 2021",
+            "summary": "Designed, developed, and maintained cutting-edge software solutions that empower data analysts and business users to efficiently extract insights from complex data sets through the Alteryx platform.",
+            "responsibilities": [
+                "Served as both a Scrum Master and an Engineer, driving the development of a charting and data profiling tool within the Windows desktop Designer product. Utilized TypeScript, React, C++, and C to deliver impactful features.",
+                "Developed MicroSDK system to introduce extensibility into Cloud Designer product. ",
+                "Developed the interactive results grid table in the cloud-based Designer product, implementing TypeScript and React creating an enhanced customer experience and streamlined workflow creation."
+            ]
+        }
+        
+    ]
+}

@@ -9,12 +9,11 @@ import { Navbar } from 'flowbite-react';
 export function GlobalNav() {
 
   return (
-    <Navbar fluid rounded>
+    <Navbar fluid className="h-20">
       <Navbar.Brand as={Link} href="/">
         <Image
             src="/kingdonlogo.png"
             alt="Kevin Kingdon Logo"
-            className="dark:invert"
             width={60}
             height={28}
             priority
