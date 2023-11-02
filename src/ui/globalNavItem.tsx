@@ -1,7 +1,6 @@
 'use client'
 import clsx from 'clsx';
 import { useSelectedLayoutSegment } from 'next/navigation';
-import Link from 'next/link';
 
 import { type Item } from '../common/navItems';
 import { Navbar } from 'flowbite-react';
