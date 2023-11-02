@@ -1,4 +1,4 @@
-export type experienceItem = {
+export type informationItem = {
     title: string;
     companyName: string;
     companyLink: string;

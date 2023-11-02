@@ -8,12 +8,17 @@ export type Item = {
       {
         name: 'About',
         slug: 'about',
-        description: 'About Kevin Kingdon',
+        description: 'About Kevin Kingdon and skills',
       },
       {
         name: 'Experience',
         slug: 'experience',
-        description: 'Various work experience, education, and skills.',
+        description: 'Various work experience.',
+      },
+      {
+        name: 'Education',
+        slug: 'education',
+        description: 'Education degrees and programs',
       },
       {
         name: 'Contact',

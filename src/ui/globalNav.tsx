@@ -21,7 +21,7 @@ export function GlobalNav() {
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Kevin Kingdon</span>
       </Navbar.Brand>
       <Navbar.Toggle />
-      <Navbar.Collapse>
+      <Navbar.Collapse className='z-10'>
         {navItems.map((item) => (
           <GlobalNavItem key={item.slug} item={item}/>
         ))}
