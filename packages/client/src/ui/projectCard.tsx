@@ -1,5 +1,5 @@
 'use client'
-import { projectItem } from '@/common/types'
+import { projectItem } from '../common/types'
 import Image from 'next/image'
 
 export default function projectCard(props:{project:projectItem}) {
