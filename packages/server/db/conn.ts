@@ -1,8 +1,14 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ServerApiVersion } from "mongodb";
 
-const connectionString = process.env.ATLAS_URI || "";
+const connectionString = "mongodb+srv://kmkingdon:test@cluster0.399gspe.mongodb.net/?retryWrites=true&w=majority";
 
-const client = new MongoClient(connectionString);
+const client = new MongoClient(connectionString, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 
 let conn;
 try {
@@ -11,6 +17,6 @@ try {
   console.error(e);
 }
 
-let db = conn?.db("sample_training");
+let db = conn?.db("kmkingdon");
 
 export default db;

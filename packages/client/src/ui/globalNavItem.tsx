@@ -12,7 +12,6 @@ export function GlobalNavItem({
   }) {
     const segment = useSelectedLayoutSegment();
     const isActive = item.slug === segment;
-    console.log({segment, isActive, item})
     return (
         <Navbar.Link 
             href={`/${item.slug}`}

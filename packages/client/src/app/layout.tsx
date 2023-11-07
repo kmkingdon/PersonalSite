@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { GlobalNav } from '../ui/globalNav';
 import './globals.css'
+import ProviderWrapper from '../redux/provider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,10 +18,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark h-[100vh] min-w-[300px]">
-      <body className="overflow-hidden bg-gray-1100 bg-white pb-36">
-        <GlobalNav />
-        <div className="w-full h-[calc(100vh-5rem)]">{children}</div>
-      </body>
+        <body className="overflow-hidden bg-gray-1100 bg-white pb-36">
+            <GlobalNav />
+            <ProviderWrapper>      
+              <div className="w-full h-[calc(100vh-5rem)]">
+                {children}
+              </div>
+            </ProviderWrapper>
+        </body>
     </html>
   )
 }

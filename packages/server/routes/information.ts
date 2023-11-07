@@ -1,17 +1,23 @@
 import express, {Request, Response} from "express";
-// import db from "../db/conn.js";
+import db from "../db/conn.js";
 // import { ObjectId } from "mongodb";
 
 const router = express.Router();
 
-// Get a list of 50 posts
-router.get("api/information", async (req:Request, res:Response) => {
-  console.log({req})
-  let results = {msg: 'Hello World'}
-  // let collection = await db.collection("posts");
-  // let results = await collection.find({})
-  //   .limit(50)
-  //   .toArray();
+router.get("/workExperience", async (_req:Request, res:Response) => {
+
+  let collection = await db?.collection("workExperience");
+  let results = await collection?.find({})
+    .toArray();
+
+  res.send(results).status(200);
+});
+
+router.get("/education", async (_req:Request, res:Response) => {
+
+  let collection = await db?.collection("education");
+  let results = await collection?.find({})
+    .toArray();
 
   res.send(results).status(200);
 });
