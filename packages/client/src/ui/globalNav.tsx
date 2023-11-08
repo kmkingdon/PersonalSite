@@ -1,10 +1,10 @@
 'use client'
-
+import { Navbar } from 'flowbite-react';
 import Image from 'next/image'
 import Link from 'next/link';
 import { navItems} from '../common/navItems';
 import { GlobalNavItem } from './globalNavItem';
-import { Navbar } from 'flowbite-react';
+
 
 export function GlobalNav() {
 
@@ -26,6 +26,6 @@ export function GlobalNav() {
           <GlobalNavItem key={item.slug} item={item}/>
         ))}
       </Navbar.Collapse>
-  </Navbar>
+    </Navbar>
   );
 }

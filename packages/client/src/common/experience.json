@@ -189,5 +189,38 @@
                 "projects": []
             }  
         ]
-    }
+    },
+    "skills": {
+        "technical": [
+            "JavaScript", "Typescript", "React", "Redux", "Test Cafe", "Jest" , "MySQL", "Knex", "Postgres", 
+            "Express", "Node", "PHP", "Vue", "VueX", "Next.js", "PACT testing", "Kubernetes"
+        ],
+        "softwareDelivery": [
+            "Agile Methodologies", "Git Team Workflow", "Repository Management","ACC Test Planning", "Collaborative Cross-Functional Leadership", 
+            "Strategic Long-term Planning", "KPI Analysis and Tracking", "Service Monitoring and Logging"
+        ], 
+        "peopleLeadership": [
+            "Growth Mindset", "Setting SMART Goals", "Objectives and Key Results (OKRs) Implementation", "Mentoring"
+        ],
+        "education": [
+            "Curriculum Development", "Project Based Learning", "Student Tracked Data/Goals", "Cross-curricular projects", "Proficiency Assessment"
+        ],
+        "community": [
+            "Athletic/team coaching", "Operational organization and orchestration", "Large event organization and orchestration", 
+            "Community/team building games", "Improvisational comedy", "Dungeons and Dragons"
+        ]
+    },
+    "history": [
+        "Born and raised in Denver, Colorado",
+        "Grew up in the Denver suburbs",
+        "Went to undergrad in Minnesota and studied painting and sculpting",
+        "Taught for a year in the Bronx, New York for a Catholic volunteer organization",
+        "Got my masters in the art of Teaching and taught middle school science in Shreveport, Louisiana",
+        "Moved back home to Denver and taught middle school science at Denver Public schools",
+        "Left teaching and went to a coding bootcamp",
+        "Worked at an ed-tech startup combining my background in teaching and coding",
+        "Became a team lead and software delivery manager",
+        "Director of Operations for the Denver gay travel flag football team, the Denver Summit",
+        "Organize monthly queer boardgaming group"
+    ]
 }

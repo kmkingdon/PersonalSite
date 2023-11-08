@@ -6,7 +6,7 @@ import morgan from "morgan"
 
 import "./loadEnvironment.js";
 import "express-async-errors";
-import informationRouter from "./routes/information.js";
+import router from "./routes/routes.js";
 import cors from "cors";
 
 const PORT = process.env.PORT || 8000;
@@ -20,7 +20,7 @@ app.use(helmet())
 app.use(cookieParser())
 app.use(morgan("dev"))
 
-app.use('/api', informationRouter);
+app.use('/api', router);
 
 // start the Express server
 app.listen(PORT, () => {

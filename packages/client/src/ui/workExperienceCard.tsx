@@ -1,8 +1,8 @@
 'use client'
-import { Dropdown } from 'flowbite-react';
 
 import ProjectCard from './projectCard';
 import { informationItem } from '../common/types';
+import { Dropdown } from 'flowbite-react';
 
 
 
@@ -32,7 +32,7 @@ export default function informationCard(props:{item:informationItem}) {
                         </span>
                     </div>
                     <p className="font-normal text-gray-700 dark:text-gray-400">
-                    {item.summary}
+                        {item.summary}
                     </p>
                     <div className="pt-8 w-full">
                         <Dropdown label="Learn More" className='w-[90%] md:w-[70%]'>
