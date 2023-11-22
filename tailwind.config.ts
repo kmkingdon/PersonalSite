@@ -8,6 +8,11 @@ const config: Config = {
     './node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
   ],
   theme: {
+    extend: {
+      dropShadow: {
+        '3xl': '0 35px 35px rgba(0, 0, 0, 1)'
+      }
+    }
   },
   plugins: [
     require('flowbite/plugin')

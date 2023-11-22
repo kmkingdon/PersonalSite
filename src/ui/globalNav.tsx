@@ -18,7 +18,7 @@ export function GlobalNav() {
             height={28}
             priority
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Kevin Kingdon</span>
+          <span className="font-sans self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Kevin Kingdon</span>
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className='z-10'>

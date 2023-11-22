@@ -18,3 +18,9 @@ export type projectItem = {
     summary: string;
     image: string;
 };
+
+export type postBody = {
+    audience: string;
+    skills: string[];
+    comments: string;
+}

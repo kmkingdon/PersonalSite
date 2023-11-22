@@ -3,6 +3,10 @@
         "education": [
             {
                 "title": "Web Development Immersive",
+                "tags": [
+                    "technical",
+                    "softwareDelivery"
+                ],
                 "companyName": "Galvanize",
                 "companyLocation": "Denver, CO",
                 "companyLink": "https://www.galvanize.com/?utm_source=Google&utm_medium=cpc&utm_campaign=Coding_Bootcamp_General_Brand&utm_term=galvanize&gclid=CjwKCAjwkY2qBhBDEiwAoQXK5cMT0R-fEsFhqYCHrlNQlaIoBGyilmm7TsXoX0yJuHajLZNjQF_OqxoCBzkQAvD_BwE",
@@ -37,6 +41,9 @@
             },
             {
                 "title": "Masters of the Art of Teaching (Secondary Sciences)",
+                "tags": [
+                    "education"
+                ],
                 "companyName": "Centenary College",
                 "companyLocation": "Shreveport, LA",
                 "companyLink": "https://www.centenary.edu/academics/departments-schools/education/program-overview-requirements/",
@@ -53,6 +60,9 @@
             },
             {
                 "title": "Bachelors of Arts of Studio Art",
+                "tags": [
+                    "community"
+                ],
                 "companyName": "Saint John's University",
                 "companyLocation": "Collegeville, MN",
                 "companyLink": "https://www.csbsju.edu/",
@@ -71,6 +81,11 @@
         "workExperience": [
             {
                 "title": "Team Lead/Software Delivery Manager",
+                "tags": [
+                    "technical",
+                    "softwareDelivery", 
+                    "peopleLeadership"
+                ],
                 "companyName": "Alteryx",
                 "companyLocation": "Broomfield, CO",
                 "companyLink": "https://www.alteryx.com/",
@@ -91,6 +106,10 @@
             },
             {
                 "title": "Software Engineer",
+                "tags": [
+                    "technical",
+                    "softwareDelivery"
+                ],
                 "companyName": "Alteryx",
                 "companyLocation": "Broomfield, CO",
                 "companyLink": "https://www.alteryx.com/",
@@ -107,6 +126,10 @@
             },
             {
                 "title": "Full Stack Web Developer",
+                "tags": [
+                    "technical",
+                    "softwareDelivery"
+                ],
                 "companyName": "PlayPosit",
                 "companyLocation": "Denver, CO",
                 "companyLink": "https://go.playposit.com/",
@@ -123,6 +146,10 @@
             },
             {
                 "title": "Web Development Immersive",
+                "tags": [
+                    "technical",
+                    "softwareDelivery"
+                ],
                 "companyName": "Galvanize",
                 "companyLocation": "Denver, CO",
                 "companyLink": "https://www.galvanize.com/?utm_source=Google&utm_medium=cpc&utm_campaign=Coding_Bootcamp_General_Brand&utm_term=galvanize&gclid=CjwKCAjwkY2qBhBDEiwAoQXK5cMT0R-fEsFhqYCHrlNQlaIoBGyilmm7TsXoX0yJuHajLZNjQF_OqxoCBzkQAvD_BwE",
@@ -157,6 +184,10 @@
             },
             {
                 "title": "Middle School Science Teacher",
+                "tags": [
+                    "education",
+                    "peopleLeadership"
+                ],
                 "companyName": "Denver Public Schools",
                 "companyLocation": "Denver, CO",
                 "companyLink": "https://www.dpsk12.org/",
@@ -174,6 +205,10 @@
             },
             {
                 "title": "Middle School Science Teacher",
+                "tags": [
+                    "education",
+                    "peopleLeadership"
+                ],
                 "companyName": "Caddo Parish Public Schools",
                 "companyLocation": "Shreveport, LA",
                 "companyLink": "https://www.caddoschools.org/",
@@ -207,7 +242,7 @@
         ],
         "community": [
             "Athletic/team coaching", "Operational organization and orchestration", "Large event organization and orchestration", 
-            "Community/team building games", "Improvisational comedy", "Dungeons and Dragons"
+            "Community/team building games", "Improvisational comedy", "Dungeons and Dragons", "Design/Graphic Design"
         ]
     },
     "history": [
