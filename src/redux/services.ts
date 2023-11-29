@@ -1,6 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { postBody } from '../common/types'
 
+type HomeImage = {
+  revised_prompt: string;
+  url: string;
+}
+
+export type HomeData =  {
+  image: {
+    created: string;
+    data: HomeImage[]
+  },
+  words: string
+}
+
 // Define a service using a base URL and expected endpoints
 export const experienceApi = createApi({
     reducerPath: 'experienceApi',
@@ -12,10 +25,10 @@ export const experienceApi = createApi({
       getEducation: builder.query<any, string>({
         query: () => ({url: 'education', method:'Get'}),
       }),
-      generateAbout: builder.mutation<any, postBody>({
+      generateAbout: builder.mutation<string, postBody>({
         query: (body) => ({url: 'about', method:'Post', body, responseHandler: (response) => response.text()}),
       }),
-      generateHome: builder.mutation<any, postBody>({
+      generateHome: builder.mutation<HomeData, postBody>({
         query: (body) => ({url: 'home', method:'Post', body}),
       }),
     }),

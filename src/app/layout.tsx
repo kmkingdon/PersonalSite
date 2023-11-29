@@ -21,10 +21,10 @@ export default function RootLayout({
     <html lang="en" className="dark h-[100vh] min-w-[300px]">
         <body className="overflow-hidden bg-gray-1100 bg-white pb-36">
             <GlobalNav />
-            <ProviderWrapper>      
-              <div className="w-full h-[calc(100vh-5rem)]">
-                {children}
-              </div>
+            <ProviderWrapper>
+                <div className="w-full h-[calc(100vh-5rem)]">
+                  {children}
+                </div>
             </ProviderWrapper>
             <Script src="./node_modules/flowbite/dist/flowbite.min.js"/>
         </body>

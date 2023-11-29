@@ -37,9 +37,9 @@ export default function informationCard(props:{item:informationItem}) {
                     <div className="pt-8 w-full">
                         <Dropdown label="Learn More" className='w-[90%] md:w-[70%]'>
                             <ul className="p-2 list-disc flex flex-col items-end">
-                                {item.responsibilities.map((text) => {
+                                {item.responsibilities.map((text, index) => {
                                     return (
-                                        <li className="w-[95%] p-2 text-gray-700 dark:text-gray-400">
+                                        <li key={index} className="w-[95%] p-2 text-gray-700 dark:text-gray-400">
                                             <p className="text-xs text-gray-700 dark:text-gray-400">
                                                 {text}
                                             </p>
@@ -51,9 +51,9 @@ export default function informationCard(props:{item:informationItem}) {
                                 <div className="flex flex-col p-8">
                                     <span className="text-lg font-bold tracking-tight text-gray-900 dark:text-white">Projects</span>
                                     <div className="flex flex-col md:flex-row md:justify-around p-2">
-                                        { item.projects.map((project) => {
+                                        { item.projects.map((project, index) => {
                                             return (
-                                                <ProjectCard project={project}/>
+                                                <ProjectCard key={index} project={project}/>
                                             )
                                         })}
                                     </div>

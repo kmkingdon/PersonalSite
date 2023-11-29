@@ -20,7 +20,7 @@ export type projectItem = {
 };
 
 export type postBody = {
-    audience: string;
+    audience?: string;
     skills: string[];
-    comments: string;
+    comments?: string;
 }

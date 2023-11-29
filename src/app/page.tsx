@@ -1,60 +1,48 @@
 'use client'
-import { useGenerateAboutMutation, useGenerateHomeMutation } from '../redux/services';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import LoadingOverlay from '../ui/loadingOverlay';
-
-const testPrompt = {
-  "audience": "Recruiter",
-  "skills": ["softwareDelivery", "peopleLeadership"],
-  "comments": "What makes him so fun?"
-}
+import { useDispatch, useSelector} from 'react-redux';
+import { generateAbout, generateHome, selectHomeAlt, selectHomeLoading, selectHomeUrl, selectHomeWords, selectPromptAudience, selectPromptComments, selectPromptSkills, setPrompt} from '../redux/generatedSlice';
+import { AppDispatch } from '../redux/store';
+import InputModal from '../ui/inputModal';
 
 export default function Home() {
-  const [updateHome, homeResult] = useGenerateHomeMutation()
-  const [updateAbout, aboutResult] = useGenerateAboutMutation()
-  const {status:homeStatus , data:homeData, error:homeError} = homeResult;
-  const {status:aboutStatus , data:aboutData, error:aboutError} = aboutResult;
+  const dispatch = useDispatch<AppDispatch>();
 
-  // view variables
-  let loading = homeStatus === 'pending';
-  const fullfilled = homeStatus === 'fulfilled';
+  //memoize selector since it returns an object
+  const words = useSelector(selectHomeWords);
+  const url = useSelector(selectHomeUrl);
+  const alt = useSelector(selectHomeAlt);
+  const loading = useSelector(selectHomeLoading)
+  
+  // modal
+  //memoize selector
+  const promptAudience = useSelector(selectPromptAudience)
+  const promptComments = useSelector(selectPromptComments)
+  const promptSkills = useSelector(selectPromptSkills)
 
-  const [words, setWords] = useState<string[]>([]);
-  const [image, setImage] = useState({url:'', alt:''});
+  const needInput = useMemo(()=> {
+    return !promptAudience && promptSkills.length === 0 && !promptComments
+  },[ promptAudience, promptComments, promptSkills])
+  const [openModal, setOpenModal] = useState(needInput);
 
-  // call on initial load
-  useEffect(() => {
-    updateHome(testPrompt)
-    updateAbout(testPrompt)
-  },[])
-
-  //set home data
-  useEffect(() => {
-    if(fullfilled){
-      const parseWords = homeData.words.split(/[\n,]/)
-      setWords(parseWords)
-      setImage({url: homeData.image.data[0].url, alt: homeData.image.data[0].revised_prompt})
-    }
-  },[homeStatus])
-
-  //set about data
-  useEffect(() => {
-    console.log({aboutStatus})
-    console.log({aboutError})
-    if(aboutStatus === 'fulfilled'){
-      // const parseParagraphs = aboutData.split('\n')
-      console.log({parseParagraphs: aboutData})
-    }
-  },[aboutStatus])
+  const generateData = (prompt: { audience: string; skills: string[]; comments: string; }) => {
+    dispatch(setPrompt(prompt))
+    dispatch(generateHome(prompt))
+    dispatch(generateAbout(prompt))
+    setOpenModal(false);
+  }
+  
 
   return (
     loading ? 
-    <LoadingOverlay />
+    <LoadingOverlay message="Generating..."/>
     :
     <main className="w-full h-full">
-      <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${image.url})`}  as React.CSSProperties} >
+      <InputModal openModal={openModal && needInput} setOpenModal={setOpenModal} generateData={generateData}/>
+      <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${url})`}  as React.CSSProperties} >
         <div className= "w-full h-full flex flex-col bg-black/[.5] ">
-          { words.map((word, index) => {
+          { words.map((word:string, index:number) => {
             const positionArray = ['flex-start', 'center', 'flex-end'];
             return (
               <div key={index} className="w-full h-[33%] flex p-24 items-end" style={{justifyContent: `${positionArray[index]}`}  as React.CSSProperties}>
