@@ -5,6 +5,7 @@ import { HomeData, experienceApi } from "./services";
 
 
 export interface GeneratedState {
+    default: boolean;
     homeWords: string[];
     homeUrl: string;
     homeAlt: string;
@@ -19,6 +20,7 @@ export interface GeneratedState {
   }
   
   const generatedState: GeneratedState = {
+    default: false,
     homeWords: [],
     homeUrl: '',
     homeAlt: '',
@@ -67,6 +69,21 @@ export const generateAbout = createAsyncThunk(
   }, 
 )
 
+export const fetchDefault = createAsyncThunk(
+  'generated/fetchDefault',
+  async (_, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+    try{
+      const result = await dispatch(
+        experienceApi.endpoints.fetchDefault.initiate('')
+      ) as {data:string}
+        return result;
+    } catch(error){
+      console.log({error})
+    }
+  }, 
+)
+
 
 export const generatedSlice = createSlice({
   name: "generated",
@@ -84,43 +101,62 @@ export const generatedSlice = createSlice({
       state.generatedState.prompt.audience = action.payload.audience;
       state.generatedState.prompt.skills = action.payload.skills;
       state.generatedState.prompt.comments = action.payload.comments;
+    },
+    setDefault(state) {
+      state.generatedState.default = true;
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(generateHome.pending , (state, action) => {
-      console.log({payloadLoading: action.payload})
+    builder.addCase(generateHome.pending , (state) => {
       state.generatedState.homeLoading = true;
     }),
     builder.addCase(generateHome.fulfilled, (state, action) => {
-      console.log({payloadFullfilled: action.payload})
       // @ts-ignore
       const {words, url, alt} = action.payload;
+      console.log({home: action.payload})
       state.generatedState.homeWords = words;
       state.generatedState.homeUrl = url;
       state.generatedState.homeAlt = alt;
       state.generatedState.homeLoading = false;
-      console.log({state})
     }),
     builder.addCase(generateHome.rejected, (state, action) => {
       console.log({payloadRejected: action.payload})
     }),
-    builder.addCase(generateAbout.pending , (state, action) => {
-      console.log({payloadLoading: action.payload})
+    builder.addCase(generateAbout.pending , (state) => {
       state.generatedState.aboutLoading = true;
     }),
     builder.addCase(generateAbout.fulfilled, (state, action) => {
-      console.log({payloadFullfilled: action.payload})
+      console.log({about: action.payload})
       state.generatedState.aboutParagraphs = action.payload as string[];
       state.generatedState.aboutLoading = false;
-      console.log({state})
     }),
     builder.addCase(generateAbout.rejected, (state, action) => {
+      console.log({payloadRejected: action.payload})
+    }),
+    builder.addCase(fetchDefault.pending , (state) => {
+      state.generatedState.aboutLoading = true;
+      state.generatedState.homeLoading = true;
+    }),
+    builder.addCase(fetchDefault.fulfilled, (state, action) => {
+      console.log({payloadFullfilled: action.payload})
+      // @ts-ignore
+      const {words, url, alt, aboutParagraphs} = action.payload?.data;
+      state.generatedState.homeWords = words;
+      state.generatedState.homeUrl = url;
+      state.generatedState.homeAlt = alt;
+      state.generatedState.aboutParagraphs = aboutParagraphs;
+      state.generatedState.aboutLoading = false;
+      state.generatedState.homeLoading = false;
+    }),
+    builder.addCase(fetchDefault.rejected, (state, action) => {
       console.log({payloadRejected: action.payload})
     })
   },
 });
 
-export const { setAboutState, setHomeState, setPrompt} = generatedSlice.actions;
+export const { setAboutState, setHomeState, setPrompt, setDefault} = generatedSlice.actions;
+
+export const selectDefault = (state: AppState) => state.generated.generatedState.default;
 
 export const selectAboutParagraphs = (state: AppState) => state.generated.generatedState.aboutParagraphs;
 export const selectAboutLoading = (state: AppState) => state.generated.generatedState.aboutLoading;

@@ -7,13 +7,16 @@ import { Navbar } from 'flowbite-react';
 
 export function GlobalNavItem({
     item,
+    disabled
   }: {
     item: Item;
+    disabled: boolean;
   }) {
     const segment = useSelectedLayoutSegment();
     const isActive = item.slug === segment;
     return (
         <Navbar.Link 
+            disabled={disabled}
             href={`/${item.slug}`}
             className={clsx(
             'block rounded-md px-3 py-2 text-sm font-medium hover:text-gray-300',

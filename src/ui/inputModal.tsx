@@ -3,6 +3,9 @@
 import { Button, Label, Modal } from "flowbite-react";
 import { useState } from "react";
 import { AUDIENCE, SKILLS } from "../common/constants";
+import { useDispatch } from "react-redux";
+import { fetchDefault, setDefault } from "../redux/generatedSlice";
+import { AppDispatch } from "../redux/store";
 
 type InputParams = {
     openModal: boolean;
@@ -10,13 +13,8 @@ type InputParams = {
     generateData: any
 }
 
-const defaultPrompt = {
-    "audience": "Recruiter",
-    "skills": ["softwareDelivery", "peopleLeadership"],
-    "comments": "What makes him so fun?"
-  }
-
 export default function InputModal({openModal, setOpenModal, generateData}:InputParams) {
+    const dispatch = useDispatch<AppDispatch>();
     const [audience, setAudience] = useState<string|undefined>(undefined);
     const [skills, setSkills] = useState<string[]>([]);
     const [comment, setComment] = useState<string|undefined>(undefined);
@@ -35,7 +33,8 @@ export default function InputModal({openModal, setOpenModal, generateData}:Input
 
     const handleGenerate = (defaultUsed:boolean) => {
         if(defaultUsed) {
-            generateData(defaultPrompt)
+            dispatch(fetchDefault())
+            dispatch(setDefault())
         } else {
             const prompt = {
                 "audience": audience,

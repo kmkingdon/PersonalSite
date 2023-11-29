@@ -25,6 +25,9 @@ export const experienceApi = createApi({
       getEducation: builder.query<any, string>({
         query: () => ({url: 'education', method:'Get'}),
       }),
+      fetchDefault: builder.query<any, string>({
+        query: () => ({url: 'default', method:'Get'}),
+      }),
       generateAbout: builder.mutation<string, postBody>({
         query: (body) => ({url: 'about', method:'Post', body, responseHandler: (response) => response.text()}),
       }),
