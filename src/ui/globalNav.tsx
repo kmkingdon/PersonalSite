@@ -8,11 +8,12 @@ import { GlobalNavItem } from './globalNavItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetState, selectAboutLoading, selectHomeLoading } from '../redux/generatedSlice';
 import { AppDispatch } from '../redux/store';
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export function GlobalNav() {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter()
+  const pathname = usePathname()
 
   const homeLoading = useSelector(selectHomeLoading)
   const aboutLoading = useSelector(selectAboutLoading)
@@ -21,8 +22,10 @@ export function GlobalNav() {
 
   const handleReset = () => {
     dispatch(resetState());
-    router.push('/about');
-    router.push('/');
+    if(pathname !== '/'){
+      router.push('/');
+    }
+    location.reload()
   }
 
   return (
@@ -35,17 +38,17 @@ export function GlobalNav() {
             height={28}
             priority
           />
-          <span className="font-sans self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Kevin Kingdon</span>
+          <span className="font-title self-center text-2xl sm:text-5xl tracking-normal sm:tracking-wide font-semibold whitespace-nowrap dark:text-white">Kevin Kingdon</span>
       </Navbar.Brand>
       <Navbar.Toggle />
-      <div className="flex flex-row space-around">
-        <Navbar.Collapse className='z-10'>
+      <div className="flex flex-row justify-end w-[50%] no-wrap">
+        <Navbar.Collapse className='z-10 bg-slate-800 mt-4 sm:bg-transparent sm:mt-0'>
           {navItems.map((item) => (
             <GlobalNavItem key={item.slug} item={item} disabled={disableNav}/>
           ))}
         </Navbar.Collapse>
         <Tooltip content="Reset Site">
-          <Button disabled={disableNav} color="light" pill onClick={() => handleReset()} className="!bg-transparent ml-4 !h-[20px] !w-[20px] !border-none">
+          <Button disabled={disableNav} color="light" pill onClick={() => handleReset()} className="absolute right-16 top-8 sm:sticky !bg-transparent ml-8 !h-[20px] !w-[20px] !border-none">
             <AiOutlineReload style={{color: "grey", fontSize: "1.5em"}}/>
           </Button>
         </Tooltip>

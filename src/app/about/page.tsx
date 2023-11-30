@@ -7,6 +7,7 @@ import ErrorOverlay from '../../ui/errorOverlay';
 import { useCallback } from 'react';
 import { AppDispatch } from '../../redux/store';
 import { postBody } from '../../common/types';
+import PageFooter from '../../ui/footer';
 
 
 export default function Page() {
@@ -27,11 +28,11 @@ export default function Page() {
   const showErrorOverlay = about;
 
   const handleDataRefetch = useCallback((defaultUsed:boolean, prompt:postBody) => {
-    dispatch(setErrorState({view:'home', reset: true, message:''}));
+    dispatch(setErrorState({view:'about', reset: true, message:''}));
     if(defaultUsed){
       dispatch(fetchDefault());
     } else {
-      dispatch(generateAbout({audience: promptAudience, skills: promptSkills, comments: promptComments}));
+      dispatch(generateAbout({audience: prompt.audience, skills: prompt.skills, comments: prompt.comments}));
     }
   },[])
 
@@ -58,6 +59,7 @@ export default function Page() {
           })
         }
       </div>
+      <PageFooter/>
     </div>
   )
 }

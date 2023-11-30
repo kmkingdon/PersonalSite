@@ -6,6 +6,7 @@ import { useGetWorkExperienceQuery } from '../../redux/services';
 import LoadingComponent from '../../ui/loadingComponent';
 import WorkExperienceCard from '../../ui/workExperienceCard';
 import ErrorOverlay from '../../ui/errorOverlay';
+import PageFooter from '../../ui/footer';
 
 
 
@@ -44,6 +45,7 @@ export default function Page() {
                 )
             }) : null
             }
+            <PageFooter/>
         </div>
     );
   }

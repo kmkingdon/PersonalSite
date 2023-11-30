@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import emailjs from '@emailjs/browser';
 import { HiCheck, HiExclamation} from 'react-icons/hi';
 import { useState } from 'react';
+import PageFooter from '../../ui/footer';
 
 type FormInputs = {
   name: string;
@@ -26,7 +27,7 @@ export default function Page() {
       emailjs.send(serviceId, 'template_mi100r1', data, publicKey)
       .then(() => {
           setShowToastSuccess(true)
-      }, (error) => {
+      }, () => {
           setShowToastError(true)
       });
     };
@@ -50,7 +51,7 @@ export default function Page() {
                   >
                     Reset Form
                   </a>
-                  <Toast.Toggle />
+                  <Toast.Toggle onDismiss={() => setShowToastSuccess(false)}/>
                 </div>
               </Toast>
           }
@@ -67,7 +68,7 @@ export default function Page() {
                   >
                     Reset Form
                   </a>
-                  <Toast.Toggle />
+                  <Toast.Toggle onDismiss={() => setShowToastError(false)}/>
                 </div>
               </Toast>
           }
@@ -85,7 +86,7 @@ export default function Page() {
                             message: 'Please use 30 characters or less'
                           }
                         })}
-                        className='w-full'
+                        className='w-full bg-slate-300'
                         placeholder='Name'
                       ></input>
                       {errors.name && <span className='text-red-400'>{errors.name.message}</span>}
@@ -97,7 +98,7 @@ export default function Page() {
                           required: true,
                           pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
                         })}
-                        className='w-full'
+                        className='w-full  bg-slate-300'
                         placeholder='Email address'
                       ></input>
                       {errors.email && (
@@ -116,7 +117,7 @@ export default function Page() {
                             message: 'Subject cannot exceed 75 characters'
                           }
                         })}
-                        className='w-full'
+                        className='w-full  bg-slate-300'
                         placeholder='Subject'
                       ></input>
                       {errors.subject && (
@@ -131,7 +132,7 @@ export default function Page() {
                         {...register('message', {
                           required: true
                         })}
-                        className='w-full'
+                        className='w-full  bg-slate-300'
                         placeholder='Message'
                       ></textarea>
                       {errors.message && <span className='text-red-400'>Please enter a message</span>}
@@ -142,6 +143,7 @@ export default function Page() {
                   </Button>
                 </form>
             </div>
+            <PageFooter/>
           </div>
     );
   }

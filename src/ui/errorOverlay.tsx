@@ -5,15 +5,19 @@ import { postBody } from "../common/types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { resetState } from "../redux/generatedSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function errorOverlay({message, handleDataRefetch, defaultUsed, prompt}:{message:string, handleDataRefetch: CallableFunction, defaultUsed:boolean, prompt:postBody | null}) {
     const dispatch = useDispatch<AppDispatch>();
+    const pathname = usePathname()
     const router = useRouter()
 
     const handleSiteReload = () => {
         dispatch(resetState());
-        router.push('/');
+        if(pathname !== '/'){
+          router.push('/');
+        }
+        location.reload()
     }
     
     return (

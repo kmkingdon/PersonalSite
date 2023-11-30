@@ -28,7 +28,8 @@ export default function RootLayout({
                 </div>
               </>
             </ProviderWrapper>
-            <Script src="./node_modules/flowbite/dist/flowbite.min.js"/>
+            <Script src="../../node_modules/flowbite/dist/flowbite.min.js"/>
+            <style>@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Saira+Extra+Condensed:wght@100&display=swap');</style>
         </body>
     </html>
   )

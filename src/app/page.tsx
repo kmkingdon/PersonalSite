@@ -8,6 +8,7 @@ import InputModal from '../ui/inputModal';
 import { Toast } from 'flowbite-react';
 import ErrorOverlay from '../ui/errorOverlay';
 import { postBody } from '../common/types';
+import PageFooter from '../ui/footer';
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,9 +29,9 @@ export default function Home() {
 
   const needInput = useMemo(()=> {
     if(defaultUsed){
-      return false
+      return false;
     } else{
-      return  !promptAudience && promptSkills.length === 0 && !promptComments
+      return  !promptAudience && promptSkills.length === 0 && !promptComments;
     }
   },[ promptAudience, promptComments, promptSkills])
   const [openModal, setOpenModal] = useState(needInput);
@@ -49,6 +50,7 @@ export default function Home() {
 
   const handleDataRefetch = useCallback((defaultUsed:boolean, prompt:postBody) => {
     dispatch(setErrorState({view:'home', reset: true, message:''}))
+    console.log({inPage: true, prompt, defaultUsed})
     if(defaultUsed){
       dispatch(fetchDefault());
     } else {
@@ -58,8 +60,8 @@ export default function Home() {
 
 
   //toast and loading
-  const loading = homeLoading && ( aboutLoading || about);
-  console.log({loading, homeLoading, aboutLoading, about})
+  const loading = homeLoading || aboutLoading
+
 
   useEffect(() => {
     setShowToast(loading)
@@ -79,8 +81,8 @@ export default function Home() {
     <>
         <LoadingOverlay message="Generating..."/>
         {showToast && (
-          <Toast className="absolute bottom-10 left-10">
-            <div className="text-sm font-normal">`Don't have time for generative AI?`</div>
+          <Toast className="absolute bottom-2 left-2 sm:bottom-10 sm:left-10">
+            <div className="text-sm font-normal">{`Don't have time for generative AI?`}</div>
             <div className="ml-auto flex items-center space-x-2">
               <a
                 onClick={() => handleDefault()}
@@ -96,19 +98,20 @@ export default function Home() {
     :
     <main className="w-full h-full">
       <InputModal openModal={openModal && needInput} setOpenModal={setOpenModal} generateData={generateData}/>
-      <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${url})`}  as React.CSSProperties} title={alt} >
+      <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${url})`}  as React.CSSProperties} aria-label={alt} >
         <div className= "w-full h-full flex flex-col bg-black/[.5] ">
           { words.map((word:string, index:number) => {
             const positionArray = ['flex-start', 'center', 'flex-end'];
             return (
               <div key={index} className="w-full h-[33%] flex p-24 items-end" style={{justifyContent: `${positionArray[index]}`}  as React.CSSProperties}>
-                <span className=" font-sans text-lg md:text-5xl md:bold text-white drop-shadow-3xl">{word}</span>
+                <span className=" font-home text-lg md:text-5xl md:bold text-white drop-shadow-3xl">{word}</span>
               </div>
               )
             })
           }
         </div>
       </div>
+      <PageFooter/>
     </main>
   )
 }
