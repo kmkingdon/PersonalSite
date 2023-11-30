@@ -1,11 +1,13 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import LoadingOverlay from '../ui/loadingOverlay';
 import { useDispatch, useSelector} from 'react-redux';
-import { fetchDefault, generateAbout, generateHome, selectAboutLoading, selectDefault, selectHomeAlt, selectHomeLoading, selectHomeUrl, selectHomeWords, selectPromptAudience, selectPromptComments, selectPromptSkills, setDefault, setPrompt} from '../redux/generatedSlice';
+import { fetchDefault, generateAbout, generateHome, selectAboutLoading, selectDefault, selectErrorState, selectHomeAlt, selectHomeLoading, selectHomeUrl, selectHomeWords, selectPromptAudience, selectPromptComments, selectPromptSkills, setDefault, setErrorState, setPrompt} from '../redux/generatedSlice';
 import { AppDispatch } from '../redux/store';
 import InputModal from '../ui/inputModal';
 import { Toast } from 'flowbite-react';
+import ErrorOverlay from '../ui/errorOverlay';
+import { postBody } from '../common/types';
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,11 +19,12 @@ export default function Home() {
   const homeLoading = useSelector(selectHomeLoading)
   const aboutLoading = useSelector(selectAboutLoading)
   
-  // modal
+  // modal state and refetch logic state
   const defaultUsed = useSelector(selectDefault)
   const promptAudience = useSelector(selectPromptAudience)
   const promptComments = useSelector(selectPromptComments)
   const promptSkills = useSelector(selectPromptSkills)
+  const promptObj = {audience:promptAudience, skills: promptSkills, comments: promptComments};
 
   const needInput = useMemo(()=> {
     if(defaultUsed){
@@ -30,7 +33,6 @@ export default function Home() {
       return  !promptAudience && promptSkills.length === 0 && !promptComments
     }
   },[ promptAudience, promptComments, promptSkills])
-  console.log({defaultUsed, needInput})
   const [openModal, setOpenModal] = useState(needInput);
 
   const generateData = (prompt: { audience: string; skills: string[]; comments: string; }) => {
@@ -40,8 +42,24 @@ export default function Home() {
     setOpenModal(false);
   }
   
+  // error view
+  const errorState = useSelector(selectErrorState)
+  const { home, about, message} = errorState;
+  const showErrorOverlay = home;
+
+  const handleDataRefetch = useCallback((defaultUsed:boolean, prompt:postBody) => {
+    dispatch(setErrorState({view:'home', reset: true, message:''}))
+    if(defaultUsed){
+      dispatch(fetchDefault());
+    } else {
+      dispatch(generateHome(prompt))
+    }
+  },[])
+
+
   //toast and loading
-  const loading = homeLoading && aboutLoading;
+  const loading = homeLoading && ( aboutLoading || about);
+
   useEffect(() => {
     setShowToast(loading)
   },[loading])
@@ -51,14 +69,17 @@ export default function Home() {
     dispatch(setDefault())
     setShowToast(false);
   }
-  console.log({loading, showToast, homeLoading, aboutLoading})
+
   return (
+    showErrorOverlay ?
+      <ErrorOverlay prompt={promptObj} defaultUsed={defaultUsed} handleDataRefetch={handleDataRefetch} message={message}/>
+    :
     loading ? 
     <>
         <LoadingOverlay message="Generating..."/>
         {showToast && (
           <Toast className="absolute bottom-10 left-10">
-            <div className="text-sm font-normal">Don't have time for generative AI?</div>
+            <div className="text-sm font-normal">`Don't have time for generative AI?`</div>
             <div className="ml-auto flex items-center space-x-2">
               <a
                 onClick={() => handleDefault()}
@@ -71,7 +92,6 @@ export default function Home() {
           </Toast>
         )}
     </>
-
     :
     <main className="w-full h-full">
       <InputModal openModal={openModal && needInput} setOpenModal={setOpenModal} generateData={generateData}/>

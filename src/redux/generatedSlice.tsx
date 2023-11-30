@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AppState } from "./store";
 import { postBody } from "../common/types";
 import { HomeData, experienceApi } from "./services";
@@ -6,6 +6,12 @@ import { HomeData, experienceApi } from "./services";
 
 export interface GeneratedState {
     default: boolean;
+    error: {
+      about: boolean;
+      home: boolean;
+      message: string;
+      status: string;
+    }
     homeWords: string[];
     homeUrl: string;
     homeAlt: string;
@@ -21,6 +27,11 @@ export interface GeneratedState {
   
   const generatedState: GeneratedState = {
     default: false,
+    error:{
+      about: false,
+      home: false,
+      message: '', 
+      status: ''},
     homeWords: [],
     homeUrl: '',
     homeAlt: '',
@@ -47,8 +58,10 @@ export const generateHome = createAsyncThunk(
         const url = result.data.image.data[0].url
         const alt = result.data.image.data[0].revised_prompt;
         return {words: parseWords, url, alt }
-    } catch(error){
-      console.log({error})
+    } catch(e){
+      console.log({e})
+      const message = (e as Error).message;
+      dispatch(setErrorState({view:'home', message, reset:false}))
     }
   }, 
 )
@@ -63,8 +76,10 @@ export const generateAbout = createAsyncThunk(
       ) as {data:string}
         const parseParagraphs = result.data.split('\n')
         return parseParagraphs;
-    } catch(error){
-      console.log({error})
+    } catch(e){
+      console.log({e})
+      const message = (e as Error).message;
+      dispatch(setErrorState({view:'about', message, reset:false}))
     }
   }, 
 )
@@ -76,10 +91,12 @@ export const fetchDefault = createAsyncThunk(
     try{
       const result = await dispatch(
         experienceApi.endpoints.fetchDefault.initiate('')
-      ) as {data:string}
+      )
         return result;
-    } catch(error){
-      console.log({error})
+    } catch(e){
+      console.log({e})
+      const message = (e as Error).message;
+      dispatch(setErrorState({view:'defaultData', message, reset:false}))
     }
   }, 
 )
@@ -92,69 +109,81 @@ export const generatedSlice = createSlice({
     setAboutState(state, action) {
       state.generatedState.aboutParagraphs = [...action.payload];
     },
-    setHomeState(state, action) {
+    setHomeState(state, action: PayloadAction<{alt:string, words:string[], url:string}>) {
       state.generatedState.homeWords = [...action.payload.words];
       state.generatedState.homeUrl = action.payload.url;
       state.generatedState.homeAlt = action.payload.alt;
     },
-    setPrompt(state, action) {
+    setPrompt(state, action: PayloadAction<{audience:string, skills:string[], comments:string}>) {
       state.generatedState.prompt.audience = action.payload.audience;
       state.generatedState.prompt.skills = action.payload.skills;
       state.generatedState.prompt.comments = action.payload.comments;
     },
     setDefault(state) {
       state.generatedState.default = true;
-    }
+    },
+    setErrorState(state, action: PayloadAction<{view: string, message:string, reset: boolean}>) {
+      const {view, message, reset } = action.payload;
+      switch(view){
+        case 'home':
+          state.generatedState.error.home = reset? false : true;
+          break;
+        case 'about':
+          state.generatedState.error.about = reset? false : true; 
+          break;
+        case 'defaultData':
+          state.generatedState.error.home = reset? false : true;
+          state.generatedState.error.about = reset? false : true;
+          break;
+      }
+      state.generatedState.error.message = message;
+    },
+    resetState(state) {
+      const resetState = {...generatedState};
+      state.generatedState = resetState;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(generateHome.pending , (state) => {
       state.generatedState.homeLoading = true;
     }),
     builder.addCase(generateHome.fulfilled, (state, action) => {
-      // @ts-ignore
-      const {words, url, alt} = action.payload;
-      console.log({home: action.payload})
-      state.generatedState.homeWords = words;
-      state.generatedState.homeUrl = url;
-      state.generatedState.homeAlt = alt;
+      if(!state.generatedState.default){
+        const {words, url, alt} = action.payload as {words: string[], url: string, alt: string};
+        state.generatedState.homeWords = words;
+        state.generatedState.homeUrl = url;
+        state.generatedState.homeAlt = alt;
+      }
       state.generatedState.homeLoading = false;
     }),
-    builder.addCase(generateHome.rejected, (state, action) => {
-      console.log({payloadRejected: action.payload})
-    }),
+    // builder.addCase(generateHome.rejected, (state, action) => {
+    //   console.log({payloadRejected: action.payload})
+    // }),
     builder.addCase(generateAbout.pending , (state) => {
       state.generatedState.aboutLoading = true;
     }),
     builder.addCase(generateAbout.fulfilled, (state, action) => {
-      console.log({about: action.payload})
-      state.generatedState.aboutParagraphs = action.payload as string[];
+      if(!state.generatedState.default){
+        state.generatedState.aboutParagraphs = action.payload as string[];
+      }
       state.generatedState.aboutLoading = false;
-    }),
-    builder.addCase(generateAbout.rejected, (state, action) => {
-      console.log({payloadRejected: action.payload})
     }),
     builder.addCase(fetchDefault.pending , (state) => {
       state.generatedState.aboutLoading = true;
       state.generatedState.homeLoading = true;
     }),
     builder.addCase(fetchDefault.fulfilled, (state, action) => {
-      console.log({payloadFullfilled: action.payload})
-      // @ts-ignore
-      const {words, url, alt, aboutParagraphs} = action.payload?.data;
-      state.generatedState.homeWords = words;
-      state.generatedState.homeUrl = url;
-      state.generatedState.homeAlt = alt;
-      state.generatedState.aboutParagraphs = aboutParagraphs;
-      state.generatedState.aboutLoading = false;
-      state.generatedState.homeLoading = false;
-    }),
-    builder.addCase(fetchDefault.rejected, (state, action) => {
-      console.log({payloadRejected: action.payload})
+      state.generatedState.homeWords = action.payload?.data.words;
+      state.generatedState.homeUrl = action.payload?.data.url;
+      state.generatedState.homeAlt = action.payload?.data.alt;
+      state.generatedState.aboutParagraphs = action.payload?.data.aboutParagraphs;
+      state.generatedState.aboutLoading = action.payload?.data.false;
+      state.generatedState.homeLoading = action.payload?.data.false;
     })
   },
 });
 
-export const { setAboutState, setHomeState, setPrompt, setDefault} = generatedSlice.actions;
+export const { setAboutState, setHomeState, setPrompt, setDefault, setErrorState, resetState} = generatedSlice.actions;
 
 export const selectDefault = (state: AppState) => state.generated.generatedState.default;
 
@@ -169,5 +198,6 @@ export const selectHomeWords = (state: AppState) => state.generated.generatedSta
 export const selectPromptAudience = (state: AppState) => state.generated.generatedState.prompt.audience;
 export const selectPromptSkills = (state: AppState) => state.generated.generatedState.prompt.skills;
 export const selectPromptComments = (state: AppState) => state.generated.generatedState.prompt.comments;
+export const selectErrorState = (state: AppState) => state.generated.generatedState.error;
 
 export default generatedSlice.reducer;
