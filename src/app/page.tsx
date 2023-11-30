@@ -59,6 +59,7 @@ export default function Home() {
 
   //toast and loading
   const loading = homeLoading && ( aboutLoading || about);
+  console.log({loading, homeLoading, aboutLoading, about})
 
   useEffect(() => {
     setShowToast(loading)
