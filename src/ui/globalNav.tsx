@@ -40,10 +40,11 @@ export function GlobalNav() {
             src="/kingdonlogo.png"
             alt="Kevin Kingdon Logo"
             width={60}
-            height={28}
+            height={0}
             priority
-          />
-          <span className={`${sierra.className} self-center text-2xl sm:text-5xl tracking-normal sm:tracking-wide font-semibold whitespace-nowrap dark:text-white`}>Kevin Kingdon</span>
+            style={{ height: 'auto' }}
+        />
+        <span className={`${sierra.className} self-center text-2xl sm:text-5xl tracking-normal sm:tracking-wide font-semibold whitespace-nowrap dark:text-white`}>Kevin Kingdon</span>
       </Navbar.Brand>
       <Navbar.Toggle />
       <div className="flex flex-row justify-end w-[50%] no-wrap">

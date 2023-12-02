@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { Inter } from 'next/font/google';
 
 import { GlobalNav } from '../ui/globalNav';
@@ -29,7 +28,6 @@ export default function RootLayout({
                 </div>
               </>
             </ProviderWrapper>
-            <Script src="../../node_modules/flowbite/dist/flowbite.min.js"/>
         </body>
     </html>
   )

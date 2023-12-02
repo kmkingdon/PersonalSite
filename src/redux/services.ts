@@ -17,7 +17,7 @@ export type HomeData =  {
 // Define a service using a base URL and expected endpoints
 export const experienceApi = createApi({
     reducerPath: 'experienceApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://kmkingdon-server-25fa566eb209.herokuapp.com/api/', credentials: "same-origin", 
+    baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE, credentials: "same-origin", 
     prepareHeaders: (headers) => {
         headers.set("Content-Type", "application/json");
         return headers;
