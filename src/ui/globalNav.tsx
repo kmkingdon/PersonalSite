@@ -2,30 +2,35 @@
 import { Button, Navbar, Tooltip } from 'flowbite-react';
 import Image from 'next/image'
 import Link from 'next/link';
+import { usePathname, useRouter } from "next/navigation";
+import { Saira_Extra_Condensed} from "next/font/google";
 import { AiOutlineReload } from "react-icons/ai";
 import { navItems} from '../common/navItems';
 import { GlobalNavItem } from './globalNavItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetState, selectAboutLoading, selectHomeLoading } from '../redux/generatedSlice';
 import { AppDispatch } from '../redux/store';
-import { usePathname, useRouter } from "next/navigation";
+
+const sierra = Saira_Extra_Condensed({weight:"100", subsets: ['latin']});
 
 export function GlobalNav() {
   const dispatch = useDispatch<AppDispatch>();
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const homeLoading = useSelector(selectHomeLoading)
-  const aboutLoading = useSelector(selectAboutLoading)
+  const homeLoading = useSelector(selectHomeLoading);
+  const aboutLoading = useSelector(selectAboutLoading);
 
   const disableNav = homeLoading || aboutLoading;
 
   const handleReset = () => {
     dispatch(resetState());
+    console.log({pathname, check: pathname !== '/'})
     if(pathname !== '/'){
       router.push('/');
+    } else {
+      location.reload();
     }
-    location.reload()
   }
 
   return (
@@ -38,7 +43,7 @@ export function GlobalNav() {
             height={28}
             priority
           />
-          <span className="font-title self-center text-2xl sm:text-5xl tracking-normal sm:tracking-wide font-semibold whitespace-nowrap dark:text-white">Kevin Kingdon</span>
+          <span className={`${sierra.className} self-center text-2xl sm:text-5xl tracking-normal sm:tracking-wide font-semibold whitespace-nowrap dark:text-white`}>Kevin Kingdon</span>
       </Navbar.Brand>
       <Navbar.Toggle />
       <div className="flex flex-row justify-end w-[50%] no-wrap">

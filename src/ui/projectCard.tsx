@@ -1,6 +1,8 @@
 'use client'
-import { projectItem } from '../common/types'
-import Image from 'next/image'
+import Image from 'next/image';
+
+import { projectItem } from '../common/types';
+
 
 export default function projectCard(props:{project:projectItem}) {
     const {project} = props;

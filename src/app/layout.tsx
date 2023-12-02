@@ -1,8 +1,9 @@
-import type { Metadata } from 'next'
-import Script from 'next/script'
-import { Inter } from 'next/font/google'
+import type { Metadata } from 'next';
+import Script from 'next/script';
+import { Inter } from 'next/font/google';
+
 import { GlobalNav } from '../ui/globalNav';
-import './globals.css'
+import './globals.css';
 import ProviderWrapper from '../redux/provider';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -29,7 +30,6 @@ export default function RootLayout({
               </>
             </ProviderWrapper>
             <Script src="../../node_modules/flowbite/dist/flowbite.min.js"/>
-            <style>@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Saira+Extra+Condensed:wght@100&display=swap');</style>
         </body>
     </html>
   )

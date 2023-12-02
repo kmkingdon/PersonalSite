@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./store";
 import React, { ReactElement } from "react";
 import { PersistGate } from "redux-persist/integration/react";
+
 import LoadingComponent from "../ui/loadingComponent";
 import { GlobalNav } from "../ui/globalNav";
 

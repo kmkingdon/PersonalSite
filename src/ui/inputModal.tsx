@@ -1,19 +1,18 @@
 'use client'
-
 import { Button, Label, Modal } from "flowbite-react";
 import { useState } from "react";
-import { AUDIENCE, SKILLS } from "../common/constants";
 import { useDispatch } from "react-redux";
+
+import { AUDIENCE, SKILLS } from "../common/constants";
 import { fetchDefault, setDefault } from "../redux/generatedSlice";
 import { AppDispatch } from "../redux/store";
 
 type InputParams = {
     openModal: boolean;
-    setOpenModal: (open: boolean) => void;
     generateData: any
 }
 
-export default function InputModal({openModal, setOpenModal, generateData}:InputParams) {
+export default function InputModal({openModal, generateData}:InputParams) {
     const dispatch = useDispatch<AppDispatch>();
     const [audience, setAudience] = useState<string|undefined>(undefined);
     const [skills, setSkills] = useState<string[]>([]);
@@ -46,9 +45,12 @@ export default function InputModal({openModal, setOpenModal, generateData}:Input
     }
 
     return (
-        <Modal show={openModal} onClose={() => setOpenModal(false)}>
-            <Modal.Header>What would you like to learn about Kevin Kingdon?</Modal.Header>
+        <Modal show={openModal}>
+            {/* <Modal.Header>What would you like to learn about Kevin Kingdon?</Modal.Header> */}
             <Modal.Body>
+            <div className="flex flex-row justify-center items-center">
+                <span className="text-white md:text-xl text-base mb-6 pb-1 border-b-[2px] border-b-white">What would you like to learn about Kevin Kingdon?</span>
+            </div>
             <form className="flex max-w-md flex-col gap-4">
                 <div>
                     <div className="mb-2 block">
@@ -93,5 +95,6 @@ export default function InputModal({openModal, setOpenModal, generateData}:Input
             </Button>
             </Modal.Footer>
         </Modal>
+
     )
 }

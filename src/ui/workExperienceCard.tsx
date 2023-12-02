@@ -1,9 +1,8 @@
 'use client'
+import { Dropdown } from 'flowbite-react';
 
 import ProjectCard from './projectCard';
 import { informationItem } from '../common/types';
-import { Dropdown } from 'flowbite-react';
-
 
 
 export default function informationCard(props:{item:informationItem}) {

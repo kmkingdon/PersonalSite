@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import emailjs from '@emailjs/browser';
 import { HiCheck, HiExclamation} from 'react-icons/hi';
 import { useState } from 'react';
+
 import PageFooter from '../../ui/footer';
 
 type FormInputs = {

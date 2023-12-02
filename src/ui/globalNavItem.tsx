@@ -1,9 +1,10 @@
 'use client'
 import clsx from 'clsx';
 import { useSelectedLayoutSegment } from 'next/navigation';
+import { Navbar } from 'flowbite-react';
 
 import { type Item } from '../common/navItems';
-import { Navbar } from 'flowbite-react';
+
 
 export function GlobalNavItem({
     item,

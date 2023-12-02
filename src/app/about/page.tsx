@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux';
+
 import { fetchDefault, generateAbout, selectAboutLoading, selectAboutParagraphs, selectDefault, selectErrorState, selectPromptAudience, selectPromptComments, selectPromptSkills, setErrorState} from '../../redux/generatedSlice';
 import LoadingOverlay from '../../ui/loadingOverlay';
 import ErrorOverlay from '../../ui/errorOverlay';

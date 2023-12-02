@@ -1,5 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { postBody } from '../common/types'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+import { postBody } from '../common/types';
 
 type HomeImage = {
   revised_prompt: string;
@@ -13,11 +14,16 @@ export type HomeData =  {
   },
   words: string
 }
-
 // Define a service using a base URL and expected endpoints
 export const experienceApi = createApi({
     reducerPath: 'experienceApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://kmkingdon-server-25fa566eb209.herokuapp.com/api/', credentials: "same-origin", 
+    prepareHeaders: (headers) => {
+        headers.set("Content-Type", "application/json");
+        return headers;
+    },
+    mode:'cors'
+  }),
     endpoints: (builder) => ({
       getWorkExperience: builder.query<any, string>({
         query: () => ({url: 'workExperience', method:'Get'}),

@@ -1,6 +1,7 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
 import { informationItem } from '../../common/types';
 import { useGetEducationQuery } from '../../redux/services';
 import ErrorOverlay from '../../ui/errorOverlay';
