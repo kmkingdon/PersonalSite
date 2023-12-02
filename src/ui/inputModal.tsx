@@ -91,7 +91,7 @@ export default function InputModal({openModal, generateData}:InputParams) {
             <Modal.Footer>
             <Button disabled={disableGenerate} onClick={() => handleGenerate(false)}>Generate Site</Button>
             <Button color="gray" onClick={() => handleGenerate(true)}>
-                I don't have time for AI, show me the site now!
+                {`I don't have time for AI, show me the site now!`}
             </Button>
             </Modal.Footer>
         </Modal>
