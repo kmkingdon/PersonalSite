@@ -19,6 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark h-[100vh] min-w-[300px]">
+        <head>
+          <title>Kevin Kingdon</title>
+          <link rel="icon" type="image/x-icon" href="/public/favicon.ico"/>
+        </head>
         <body className="overflow-hidden bg-gray-1100 bg-white pb-36">
             <ProviderWrapper>
               <>

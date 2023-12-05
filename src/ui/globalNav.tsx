@@ -47,7 +47,7 @@ export function GlobalNav() {
         <span className={`${sierra.className} self-center text-2xl sm:text-5xl tracking-normal sm:tracking-wide font-semibold whitespace-nowrap dark:text-white`}>Kevin Kingdon</span>
       </Navbar.Brand>
       <Navbar.Toggle />
-      <div className="flex flex-row justify-end w-[50%] no-wrap">
+      <div className="flex flex-row justify-end w-full sm:w-[50%] no-wrap">
         <Navbar.Collapse className='z-10 bg-slate-800 mt-4 sm:bg-transparent sm:mt-0'>
           {navItems.map((item) => (
             <GlobalNavItem key={item.slug} item={item} disabled={disableNav}/>

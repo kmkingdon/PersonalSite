@@ -37,7 +37,7 @@ export default function Home() {
     } else{
       return  !promptAudience && promptSkills.length === 0 && !promptComments;
     }
-  },[ promptAudience, promptComments, promptSkills])
+  },[ promptAudience, promptComments, promptSkills, defaultUsed])
   const [openModal, setOpenModal] = useState(needInput);
 
   const generateData = (prompt: { audience: string; skills: string[]; comments: string; }) => {
@@ -49,12 +49,11 @@ export default function Home() {
   
   // error view
   const errorState = useSelector(selectErrorState)
-  const { home, about, message} = errorState;
+  const { home, message} = errorState;
   const showErrorOverlay = home;
 
   const handleDataRefetch = useCallback((defaultUsed:boolean, prompt:postBody) => {
     dispatch(setErrorState({view:'home', reset: true, message:''}))
-    console.log({inPage: true, prompt, defaultUsed})
     if(defaultUsed){
       dispatch(fetchDefault());
     } else {

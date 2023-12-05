@@ -56,7 +56,7 @@ export default function Page() {
         />
         {
           aboutParagraphs.map((text, index) => {
-            return  <p key={index} className="text-white px-12 py-4 text-justify text-lg indent-20 break-normal">{text}</p>
+            return  <p key={index} className="text-white px-4 sm:px-12 py-4 text-justify text-lg indent-20 break-normal">{text}</p>
           })
         }
       </div>
