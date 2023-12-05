@@ -25,7 +25,6 @@ export function GlobalNav() {
 
   const handleReset = () => {
     dispatch(resetState());
-    console.log({pathname, check: pathname !== '/'})
     if(pathname !== '/'){
       router.push('/');
     } else {

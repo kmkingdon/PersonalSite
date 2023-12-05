@@ -64,6 +64,15 @@ export default function Home() {
 
   //toast and loading
   const loading = homeLoading || aboutLoading
+  const [ status, setStatus ] = useState('initialized');
+  useEffect(() => {
+    if(loading){
+      setStatus('loading')
+    } else {
+      setStatus('complete')
+    }
+  }, [loading])
+
 
 
   useEffect(() => {
