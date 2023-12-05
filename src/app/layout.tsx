@@ -20,7 +20,7 @@ export default function RootLayout({
             <ProviderWrapper>
               <>
                 <GlobalNav />
-                <div className="w-full h-[calc(100vh-5rem)]">
+                <div className="w-full h-full overflow-hidden">
                   {children}
                 </div>
               </>
