@@ -62,19 +62,32 @@ export default function Home() {
   },[])
 
 
-  //toast and loading
+  //loading and image check
   const loading = homeLoading || aboutLoading
-  const [ status, setStatus ] = useState('initialized');
+  //reset state to ensure component re-render and check for image load error
+  const [ finalUrl, setUrl ] = useState(url);
+  const testImage = (url:string) => {
+    const img = new Image();
+    img.src = url;
+    img.onerror = ((e) => {
+      setUrl('/defaultBackground.png');
+    })
+    img.onload = (() => {
+      setUrl(url)
+    })
+  }
+  
   useEffect(() => {
-    if(loading){
-      setStatus('loading')
-    } else {
-      setStatus('complete')
+    // after loading, ensure image loaded, 
+    // if not, set default background
+    if(!loading){
+      testImage(url)
     }
   }, [loading])
 
 
 
+  //toast
   useEffect(() => {
     setShowToast(loading)
   },[loading])
@@ -110,13 +123,13 @@ export default function Home() {
     :
     <main className="w-full h-full">
       <InputModal openModal={openModal && needInput} generateData={generateData}/>
-      <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${url})`}  as React.CSSProperties} aria-label={alt} >
+      <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${finalUrl})`}  as React.CSSProperties} aria-label={alt} >
         <div className= "w-full h-full flex flex-col bg-black/[.5] ">
           { words.map((word:string, index:number) => {
             const positionArray = ['flex-start', 'center', 'flex-end'];
             return (
               <div key={index} className="w-full h-[33%] flex p-24 items-end" style={{justifyContent: `${positionArray[index]}`}  as React.CSSProperties}>
-                <span className={`${bebas.className} text-lg md:text-5xl md:bold text-white drop-shadow-3xl`}>{word}</span>
+                <span className={`${bebas.className} text-xl md:text-5xl md:bold text-white drop-shadow-3xl`}>{word}</span>
               </div>
               )
             })
