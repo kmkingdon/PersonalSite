@@ -113,14 +113,7 @@ export default function Home() {
     :
     <main className="w-full h-full">
       <InputModal openModal={openModal && needInput} generateData={generateData}/>
-      <div className="w-full h-full relative" >
-        <Image
-          alt={alt}
-          src={url}
-          onError={(e) => {console.log({e})}}
-          layout='fill'
-          objectFit='contain'
-        />
+      <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${url})`}  as React.CSSProperties} aria-label={alt} >
         <div className= "w-full h-full flex flex-col bg-black/[.5] ">
           { words.map((word:string, index:number) => {
             const positionArray = ['flex-start', 'center', 'flex-end'];
