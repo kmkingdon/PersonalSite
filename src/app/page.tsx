@@ -65,16 +65,14 @@ export default function Home() {
   //loading and image check
   const loading = homeLoading || aboutLoading
   //reset state to ensure component re-render and check for image load error
-  const [ finalUrl, setUrl ] = useState(url);
+  const [ finalUrl, setUrl ] = useState('');
   const testImage = (url:string) => {
     const img = new Image();
     img.src = url;
     img.onerror = ((e) => {
-      console.log({e})
       setUrl('/defaultBackground.png');
     })
     img.onload = ((l) => {
-      console.log({l})
       setUrl(url)
     })
   }

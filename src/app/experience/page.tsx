@@ -46,6 +46,7 @@ export default function Page() {
                 )
             }) : null
             }
+            <div className="w-full h-12"></div>
             <PageFooter/>
         </div>
     );
