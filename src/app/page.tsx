@@ -1,5 +1,6 @@
 'use client'
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import Image from 'next/image'
 import { Toast } from 'flowbite-react';
 import { Bebas_Neue } from "next/font/google";
 
@@ -65,23 +66,12 @@ export default function Home() {
   //loading and image check
   const loading = homeLoading || aboutLoading
   //reset state to ensure component re-render and check for image load error
-  const [ finalUrl, setUrl ] = useState('');
-  const testImage = (url:string) => {
-    const img = new Image();
-    img.src = url;
-    img.onerror = ((e) => {
-      setUrl('/defaultBackground.png');
-    })
-    img.onload = ((l) => {
-      setUrl(url)
-    })
-  }
-  
+  const [ status, setStatus ] = useState('initialized');
   useEffect(() => {
-    // after loading, ensure image loaded, 
-    // if not, set default background
-    if(!loading){
-      testImage(url)
+    if(loading){
+      setStatus('loading');
+    } else {
+      setStatus('complete')
     }
   }, [loading])
 
@@ -123,7 +113,14 @@ export default function Home() {
     :
     <main className="w-full h-full">
       <InputModal openModal={openModal && needInput} generateData={generateData}/>
-      <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${finalUrl})`}  as React.CSSProperties} aria-label={alt} >
+      <div className="w-full h-full relative" >
+        <Image
+          alt={alt}
+          src={url}
+          onError={(e) => {console.log({e})}}
+          layout='fill'
+          objectFit='contain'
+        />
         <div className= "w-full h-full flex flex-col bg-black/[.5] ">
           { words.map((word:string, index:number) => {
             const positionArray = ['flex-start', 'center', 'flex-end'];

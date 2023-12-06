@@ -60,7 +60,7 @@ export default function Page() {
           })
         }
       </div>
-      <div className="w-full h-12"></div>
+      <div className="w-full h-24"></div>
       <PageFooter/>
     </div>
   )
