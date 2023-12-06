@@ -70,9 +70,11 @@ export default function Home() {
     const img = new Image();
     img.src = url;
     img.onerror = ((e) => {
+      console.log({e})
       setUrl('/defaultBackground.png');
     })
-    img.onload = (() => {
+    img.onload = ((l) => {
+      console.log({l})
       setUrl(url)
     })
   }

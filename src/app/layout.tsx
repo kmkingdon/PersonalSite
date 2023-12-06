@@ -7,7 +7,6 @@ import ProviderWrapper from '../redux/provider';
 export const metadata: Metadata = {
   title: 'Kevin Kingdon',
   description: "Kevin Kingdon's Personal Site",
-  viewport: "width=device-width, height=device-height, initial-scale=1",
   icons: "./icon.ico"
 }
 
@@ -22,7 +21,7 @@ export default function RootLayout({
             <ProviderWrapper>
               <>
                 <GlobalNav />
-                <div className="w-full h-full overflow-hidden">
+                <div className="w-full h-[calc(100vh-5rem)] overflow-hidden">
                   {children}
                 </div>
               </>
