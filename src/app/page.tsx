@@ -75,6 +75,7 @@ export default function Home() {
     }
     catch(e) {
       console.log({e})
+      setUrl('/defaultBackground.png')
     }
   }
   useEffect(() => {
