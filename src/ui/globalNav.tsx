@@ -53,7 +53,7 @@ export function GlobalNav() {
           ))}
         </Navbar.Collapse>
         <Tooltip content="Reset Site">
-          <Button disabled={disableNav} color="light" pill onClick={() => handleReset()} className="absolute right-16 top-8 sm:sticky !bg-transparent ml-8 !h-[20px] !w-[20px] !border-none">
+          <Button disabled={disableNav} color="light" pill onClick={() => handleReset()} className="absolute right-24 top-7 sm:sticky !bg-transparent ml-8 !h-[20px] !w-[20px] !border-none">
             <AiOutlineReload style={{color: "grey", fontSize: "1.5em"}}/>
           </Button>
         </Tooltip>

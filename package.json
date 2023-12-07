@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "proxy": "npx local-ssl-proxy --key cert.key --cert cert.crt --source 3002 --target 3001"
+    "proxy": "npx local-ssl-proxy --key cert.key --cert cert.crt --source 3000 --target 3001"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",

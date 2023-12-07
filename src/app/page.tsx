@@ -1,6 +1,5 @@
 'use client'
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import Image from 'next/image'
 import { Toast } from 'flowbite-react';
 import { Bebas_Neue } from "next/font/google";
 
@@ -12,6 +11,7 @@ import InputModal from '../ui/inputModal';
 import ErrorOverlay from '../ui/errorOverlay';
 import { postBody } from '../common/types';
 import PageFooter from '../ui/footer';
+import LoadingComponent from '../ui/loadingComponent';
 
 const bebas = Bebas_Neue({weight:"400", subsets: ['latin']});
 
@@ -66,11 +66,22 @@ export default function Home() {
   //loading and image check
   const loading = homeLoading || aboutLoading
   //reset state to ensure component re-render and check for image load error
+  const [ finalUrl, setUrl ] = useState(url)
   const [ status, setStatus ] = useState('initialized');
+  const testImage = async (url:string) => {
+    try{
+      const response = await fetch(url, { mode: 'no-cors'});
+      console.log({response})
+    }
+    catch(e) {
+      console.log({e})
+    }
+  }
   useEffect(() => {
     if(loading){
       setStatus('loading');
     } else {
+      testImage(url)
       setStatus('complete')
     }
   }, [loading])
@@ -113,8 +124,13 @@ export default function Home() {
     :
     <main className="w-full h-full">
       <InputModal openModal={openModal && needInput} generateData={generateData}/>
-      <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${url})`}  as React.CSSProperties} aria-label={alt} >
-        <div className= "w-full h-full flex flex-col bg-black/[.5] ">
+        <div className="w-full h-full flex justify-center align-center overflow-hidden">
+        { url.length > 0 ?
+        <img className="w-full object-cover z-0" src={finalUrl} alt={alt}></img>
+        :
+        <LoadingComponent/>
+        }
+        <div className= "absolute w-full h-full flex flex-col bg-black/[.5] z-2">
           { words.map((word:string, index:number) => {
             const positionArray = ['flex-start', 'center', 'flex-end'];
             return (
@@ -130,3 +146,7 @@ export default function Home() {
     </main>
   )
 }
+
+
+
+{/* <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${url})`}  as React.CSSProperties} aria-label={alt} > */}
