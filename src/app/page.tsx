@@ -128,7 +128,7 @@ export default function Home() {
           { words.map((word:string, index:number) => {
             const positionArray = ['flex-start', 'center', 'flex-end'];
             return (
-              <div key={index} className="w-full h-[33%] flex p-24 items-end" style={{justifyContent: `${positionArray[index]}`}  as React.CSSProperties}>
+              <div key={index} className="w-full h-[25%] flex p-24 items-end" style={{justifyContent: `${positionArray[index]}`}  as React.CSSProperties}>
                 <span className={`${bebas.className} text-xl md:text-5xl md:bold text-white drop-shadow-3xl`}>{word}</span>
               </div>
               )
@@ -140,7 +140,3 @@ export default function Home() {
     </main>
   )
 }
-
-
-
-{/* <div className="w-full h-full bg-[image:var(--image-url)] bg-repeat-y md:bg-no-repeat bg-center bg-cover" style={{'--image-url': `url(${url})`}  as React.CSSProperties} aria-label={alt} > */}
