@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Toast } from 'flowbite-react';
 import { Bebas_Neue } from "next/font/google";
+import {useImage} from 'react-image';
 
 import LoadingOverlay from '../ui/loadingOverlay';
 import { useDispatch, useSelector} from 'react-redux';
@@ -66,23 +67,15 @@ export default function Home() {
   //loading and image check
   const loading = homeLoading || aboutLoading
   //reset state to ensure component re-render and check for image load error
-  const [ finalUrl, setUrl ] = useState(url)
   const [ status, setStatus ] = useState('initialized');
-  const testImage = async (url:string) => {
-    try{
-      const response = await fetch(url, { mode: 'no-cors'});
-      console.log({response})
-    }
-    catch(e) {
-      console.log({e})
-      setUrl('/defaultBackground.png')
-    }
-  }
+  const {src} = useImage({
+    srcList: [url, '/defaultBackground.png']
+  })
+
   useEffect(() => {
     if(loading){
       setStatus('loading');
     } else {
-      testImage(url)
       setStatus('complete')
     }
   }, [loading])
@@ -127,7 +120,7 @@ export default function Home() {
       <InputModal openModal={openModal && needInput} generateData={generateData}/>
         <div className="w-full h-full flex justify-center align-center overflow-hidden">
         { url.length > 0 ?
-        <img className="w-full object-cover z-0" src={url} alt={alt}></img>
+        <img className="w-full object-cover z-0" src={src} alt={alt}></img>
         :
         <LoadingComponent/>
         }
