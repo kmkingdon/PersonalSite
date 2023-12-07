@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 import { GlobalNav } from '../ui/globalNav';
 import './globals.css';
@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: 'Kevin Kingdon',
   description: "Kevin Kingdon's Personal Site",
   icons: "./icon.ico"
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1
 }
 
 export default function RootLayout({
