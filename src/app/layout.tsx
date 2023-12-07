@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark h-[100vh] min-w-[300px]">
-        <body className="overflow-hidden h-[100vh] w-[100vw] bg-gray-1100 bg-white">
+        <body className="overflow-hidden h-[100svh] w-[100vw] bg-gray-1100 bg-white">
             <ProviderWrapper>
               <>
                 <GlobalNav />
