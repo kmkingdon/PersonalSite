@@ -127,7 +127,7 @@ export default function Home() {
       <InputModal openModal={openModal && needInput} generateData={generateData}/>
         <div className="w-full h-full flex justify-center align-center overflow-hidden">
         { url.length > 0 ?
-        <img className="w-full object-cover z-0" src={finalUrl} alt={alt}></img>
+        <img className="w-full object-cover z-0" src={url} alt={alt}></img>
         :
         <LoadingComponent/>
         }
