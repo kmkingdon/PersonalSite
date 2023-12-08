@@ -13,6 +13,7 @@ import ErrorOverlay from '../ui/errorOverlay';
 import { postBody } from '../common/types';
 import PageFooter from '../ui/footer';
 import LoadingComponent from '../ui/loadingComponent';
+import Link from 'next/link';
 
 const bebas = Bebas_Neue({weight:"400", subsets: ['latin']});
 
@@ -129,7 +130,9 @@ export default function Home() {
             const positionArray = ['flex-start', 'center', 'flex-end'];
             return (
               <div key={index} className="w-full h-[25%] flex p-24 items-end" style={{justifyContent: `${positionArray[index]}`}  as React.CSSProperties}>
-                <span className={`${bebas.className} text-xl md:text-5xl md:bold text-white drop-shadow-3xl`}>{word}</span>
+                <Link href="/about">
+                  <span className={`${bebas.className} text-xl md:text-5xl md:bold text-white drop-shadow-3xl`}>{word}</span>
+                </Link>
               </div>
               )
             })

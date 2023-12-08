@@ -8,10 +8,10 @@ export default function PageFooter() {
     const [showFooter, setShowFooter] = useState(false)
     return (
         <>
-            <div className="w-full absolute bottom-0 top-[calc(100vh-3rem)] !bg-transparent h-16 z-8" onMouseEnter={(e) => {
+            <div className="w-full absolute bottom-0 top-[calc(100vh-3rem)] !bg-transparent h-16 z-8" onMouseEnter={() => {
                 setShowFooter(true) 
             }}></div>
-            <div className={showFooter ? "w-full absolute bottom-[-8px] h-16 animate-[fadeIn_0.5s_ease-in-out] sm:bg-transparent bg-slate-700 z-10" : "hidden"} onMouseLeave={(f) =>{ 
+            <div className={showFooter ? "w-full absolute bottom-[-8px] h-16 animate-[fadeIn_0.5s_ease-in-out] sm:bg-transparent bg-slate-700 z-10" : "hidden"} onMouseLeave={() =>{ 
                 setShowFooter(false)
                 }}>
                 <div className="w-full h-full px-4 py-6 flex flex-row items-center justify-between">
